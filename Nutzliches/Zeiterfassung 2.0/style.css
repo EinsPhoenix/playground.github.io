@@ -1,0 +1,201 @@
+body {
+
+    font-family: Arial, sans-serif;
+
+    text-align: center;
+
+    
+
+}
+
+/* Hintergrund auf hellgrau setzen */
+body {
+    background-color: lightgray;
+}
+
+/* Alle MDL-Objekte auf Orange ändern */
+.mdl-layout__header,
+.mdl-layout-title,
+.mdl-layout__tab-bar .mdl-layout__tab {
+    background-color: orange;
+    color: white;
+}
+
+
+
+.container {
+
+    margin: 50px auto;
+
+    max-width: 400px;
+
+    position: fixed;
+
+    padding: 20px;
+
+    text-align: center;
+
+}
+
+
+
+button {
+
+    padding: 10px 20px;
+
+    font-size: 16px;
+
+    margin: 10px;
+
+   
+
+}
+
+
+
+.popup {
+
+    display: none;
+
+    position: fixed;
+
+    top: 50%;
+
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    background-color: white;
+
+    padding: 20px;
+
+    border: 1px solid #ccc;
+
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+    z-index: 1000;
+
+    text-align: center;
+
+}
+
+body,
+.numberfield input,
+.mdl-layout-title,
+.mdl-layout__tab {
+    font-size: 20px; /* Standard-Textgröße */
+}
+
+/* Text zentrieren */
+body,
+.mdl-layout__tab,
+.mdl-layout__header-row,
+.mdl-layout-title,
+.numberfield,
+.mdl-layout__drawer,
+.mdl-navigation__link,
+.page-content-training-Voks,
+.page-content {
+    text-align: center;
+}
+
+/* Abstand von 2.5 Pixeln zwischen Text und Textfeldern */
+.numberfield {
+    margin: 5px;
+}
+
+/* Button-Styling */
+button {
+    padding: 10px 20px; /* Kleinere Abmessungen für den Button */
+    font-size: 16px; /* Kleinere Textgröße für den Button */
+    cursor: pointer;
+}
+
+button.blau {
+    background-color: blue;
+    color: white;
+}
+
+
+
+.container-zentriert {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh; /* Damit die gesamte Bildschirmhöhe genutzt wird */
+}
+
+/* Du kannst die Stile für den Inhalt hier anpassen */
+select, input, button {
+    margin: 10px;
+}
+
+/* Dunkelgraue Box */
+.zentriert {
+    background-color: darkgray;
+    padding: 20px;
+    width: 600px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Textgröße und Layout-Anpassungen für größere Bildschirme */
+@media (min-width: 520px) {
+    body,
+    .numberfield input,
+    .mdl-layout-title,
+    .mdl-layout__tab {
+        font-size: 20px; /* Größere Textgröße für größere Bildschirme */
+    }
+
+    /* Dropdown-Menüs nebeneinander anzeigen */
+    .numberfield select {
+        width: calc(50% - 5px); /* 50% Breite, Abstand von 2.5px zwischen den Dropdown-Menüs */
+        display: inline-block;
+        margin-right: 5px;
+    }
+
+    /* Abstand von 2.5 Pixeln zwischen Text und Dropdown-Menüs */
+    .numberfield {
+        margin: 5px;
+    }
+
+    /* Button-Styling für größere Bildschirme */
+    button {
+        padding: 10px 20px; /* Größere Abmessungen für den Button */
+        font-size: 15px; /* Größere Textgröße für den Button */
+    }
+
+    .Forminput1.form-control {
+        width: 135px;
+        height: 30px; 
+        font-size: 30px;
+        margin: 0 auto; /* Zentriert das Textfeld horizontal */
+        text-align: center; /* Zentriert den Text im Textfeld horizontal */
+    }
+
+    #auswählbardatum{
+        width: 225px;
+        height: 30px; 
+        font-size: 30px;
+        margin: 0 auto; /* Zentriert das Textfeld horizontal */
+        text-align: center;
+
+    }
+
+    #numberfieldst {
+        width: 225px;
+        height: 30px;
+        font-size: 30px;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    
+
+
+        
+}
