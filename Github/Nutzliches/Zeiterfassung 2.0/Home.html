@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+
+<html lang="de">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Zeiterfassung</title>
+
+    <script src="Speicherung.js"></script>
+    <script src="newMonth.js"></script>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="manifest" href="manifest.webmanifest">
+
+
+
+
+
+
+
+
+
+</head>
+
+<body>
+    <div class="margin-top-bottom">
+        <!-- Ihr Inhalt hier -->
+
+        <script>
+            // Diese Funktion wird beim Laden der Website ausgeführt
+            function beimSeitenladen() {
+                // Fügen Sie hier den Code ein, den Sie beim Start ausführen möchten
+                console.log("Die Website wurde geladen!");
+
+                // Beispiel: Rufen Sie die Funktion zur Überprüfung und Aktualisierung des Monats auf
+                speichereAktuellenMonat();
+            }
+
+            // Fügen Sie einen Eventlistener für das DOMContentLoaded-Event hinzu
+            document.addEventListener("DOMContentLoaded", beimSeitenladen);
+        </script>
+
+        <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header
+mdl-layout--fixed-tabs">
+            <header class="mdl-layout__header">
+                <div class="mdl-layout__header-row">
+                    <!-- Title -->
+                    <span class="mdl-layout-title">Zeiterfassung</span>
+                </div>
+                <!-- Tabs -->
+                <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
+                    <a href="#Hauptseite" class="mdl-layout__tab is-active">Übersicht</a>
+                    <a href="#Zeiterfassung" class="mdl-layout__tab">Zeiterfassung</a>
+
+                </div>
+            </header>
+            <div class="mdl-layout__drawer">
+                <span class="mdl-layout-title">Menu</span>
+                <nav class="mdl-navigation">
+                    <a class="mdl-navigation__link" href="Home.html">Zeiterfassung</a>
+                    <a class="mdl-navigation__link" href="Tabelle.html">Tabelle</a>
+                    <a class="mdl-navigation__link" href="../index.html">Zu Github</a>
+
+                </nav>
+            </div>
+            <main class="mdl-layout__content">
+                <section class="mdl-layout__tab-panel is-active" id="Hauptseite">
+                    <div class="page-content">
+                        <br>
+                        <br>
+
+                        Ueberstunden:
+                        <br>
+
+                        <p id="ueberstundenspeicheranzeige"></p>
+
+                        <script>if (localStorage.getItem('Ueberstundengespeichert') !== null) {
+                                // Den Inhalt des Elements aktualisieren
+                                const ueberstundenspeicher = JSON.parse(localStorage.getItem('Ueberstundengespeichert')) || 0;
+                                const ueberstundenanz = ueberstundenspeicher;
+                                document.getElementById("ueberstundenspeicheranzeige").innerHTML = "Die überstunden betragen: " + ueberstundenanz;
+                            } else {
+                                // Wenn der Schlüssel nicht vorhanden ist, eine Meldung anzeigen oder eine Standardmeldung verwenden
+                                document.getElementById("ueberstundenspeicheranzeige").innerHTML = "Etwas ist schiefgelaufen oder keine eingabe vorhanden";
+                            }
+                        </script>
+                        <br>
+
+                        Arbeitszeit diesen Monat:
+                        <p id="arbeitszeitspeicheranzeige"></p>
+
+                        <script>
+                            // Überprüfen, ob der Schlüssel "arbeitszeitspeicher" im localStorage vorhanden ist
+                            if (localStorage.getItem('Arbeitszeitgespeichert') !== null) {
+                                // Den Inhalt des Elements aktualisieren
+                                const arbeitszeitspeicher = JSON.parse(localStorage.getItem('Arbeitszeitgespeichert')) || 0;
+                                const arbeitszeitanz = arbeitszeitspeicher;
+                                document.getElementById("arbeitszeitspeicheranzeige").innerHTML = "Die gearbeitete Zeit diesen Monat beträgt: " + arbeitszeitanz;
+                            } else {
+                                // Wenn der Schlüssel nicht vorhanden ist, eine Meldung anzeigen oder eine Standardmeldung verwenden
+                                document.getElementById("arbeitszeitspeicheranzeige").innerHTML = "Die gearbeitete Zeit diesen Monat ist nicht verfügbar.";
+                            }
+                        </script>
+
+                        Überstunden im letzten monat dazugekommen:
+                        <p id="Ueberstundendazu"></p>
+
+
+
+
+                        Suchen nach Daten:
+                        <p><input type="text" id="suchfeld"></p>
+                        <div id="ergebnis"></div>
+                        <script src="Suche.js"></script>
+
+
+
+                        <br>
+                        <div class="container-zentriert">
+                            <div class="zentriert">
+                                <select name="nachtrage" id="nachtragendrop">
+                                    <option value="Arbeitszeitgespeichert">Arbeitszeit</option>
+                                    <option value="Ueberstundengespeichert">Überstunden</option>
+                                </select>
+                                <input type="text" id="nachtragen" placeholder="- um Stunden abzuziehen" value="0">
+                                <button id="stundenweg" onclick="stundenwegfunction()">Bestätigen</button>
+                            </div>
+                        </div>
+
+                        <script>
+                            function stundenwegfunction() {
+                                const wegElement = parseFloat(document.getElementById("nachtragen").value);
+                                const nachtragenauswahl = document.getElementById("nachtragendrop").value;
+
+                                if (!isNaN(wegElement)) {
+                                    if (nachtragenauswahl === 'Ueberstundengespeichert') {
+                                        // Überstunden speichern
+                                        const ueberstundenspeicher = parseFloat(localStorage.getItem('Ueberstundengespeichert')) || 0;
+                                        const neuueberstundenspeicher = ueberstundenspeicher + wegElement;
+                                        localStorage.setItem('Ueberstundengespeichert', neuueberstundenspeicher);
+                                        alert(`Neue Überstunden: ${neuueberstundenspeicher}`);
+                                    }
+
+                                    else if (!isNaN(wegElement)) {
+                                        if (nachtragenauswahl === 'Arbeitszeitgespeichert') {
+                                            // Überstunden speichern
+                                            const Arbeitszeitgespeichertweg = parseFloat(localStorage.getItem('Arbeitszeitgespeichert')) || 0;
+                                            const neuuearbeitszeitgespeicher = Arbeitszeitgespeichertweg + wegElement;
+                                            localStorage.setItem('Arbeitszeitgespeichert', neuuearbeitszeitgespeicher);
+                                            alert(`Neue arbeitszeit: ${neuuearbeitszeitgespeicher}`);
+                                        }
+
+                                        else {
+                                            console.log('fehler');
+                                            alert(`Fehler speichern nicht möglich`);
+                                        }
+
+                                    }
+
+                                    // Hier können Sie weitere Logik für die Arbeitszeit hinzufügen
+                                }
+                            }
+                        </script>
+
+
+
+
+
+
+
+
+
+
+
+                    </div>
+                </section>
+                <section class="mdl-layout__tab-panel" id="Zeiterfassung">
+                    <div class="page-content-Zeiterfassung">
+
+
+
+                        <div>
+                            <br>
+                            <br>
+                            <br>
+
+                            Arbeitszeiterfassung vom <p> <input type="date" id="auswählbardatum" name="Date"
+                                    placeholder="datum" onchange="prüfeDatum()"></p>
+                            <script>
+                                function prüfeDatum() {
+                                    // Datum aus dem Input-Feld auslesen
+                                    var eingetragenesDatum = document.getElementById("auswählbardatum").value;
+
+                                    // Überprüfen, ob das Datum bereits im lokalen Speicher vorhanden ist
+                                    if (localStorage.getItem(eingetragenesDatum)) {
+                                        alert("Dieses Datum ist bereits im lokalen Speicher gespeichert.");
+                                        document.getElementById("auswählbardatum").value = ""; // Das Eingabefeld leeren
+                                        return;
+                                    }
+
+                                    // Aktuelles Datum erhalten
+                                    var aktuellesDatum = new Date().toISOString().split('T')[0];
+
+                                    // Überprüfen, ob das ausgewählte Datum in der Zukunft liegt
+                                    if (eingetragenesDatum > aktuellesDatum) {
+                                        alert("Das Datum darf nicht in der Zukunft liegen.");
+                                        document.getElementById("auswählbardatum").value = ""; // Das Eingabefeld leeren
+                                        return;
+                                    }
+
+                                    // Wenn alle Überprüfungen bestanden sind, das Datum in den lokalen Speicher speichern
+
+                                    localStorage.setItem('Monat', eingetragenesDatum);
+
+                                }</script>
+
+
+                            <br>
+                            <br>
+                        </div>
+
+                        <label for="anfangszeit">Anfangszeit:</label>
+                        <br>
+
+                        <div class="input-group input-group-sm mb-1">
+
+                            <input class="Forminput1 form-control Zeit1" type="time" id="anfangszeit" name="anfangszeit"
+                                value="13:19" size="20" style="text-align: right; max-width: 100%;">
+
+                            <div class="input-group-append">
+
+                                <span class="input-group-text">&nbsp;</span>
+
+                            </div>
+
+                        </div>
+
+                        <br>
+
+
+
+
+                        Pause?
+
+                        <br>
+
+                        <label for="checkboxpause">Ja</label>
+
+                        <input id="checkboxpause" type="checkbox" checked="true" />
+
+                        <br>
+
+                        <br>
+
+                        <div class="Pause">
+
+                            <label for="startzeitmittag">Start Mittagspause:</label>
+                            <br>
+                            <div class="input-group input-group-sm mb-1">
+
+                                <input class="Forminput1 form-control Zeit1" type="time" id="startzeitmittag"
+                                    name="startzeitmittag" value="13:19" size="20"
+                                    style="text-align: right; max-width: 100%;">
+
+                                <div class="input-group-append">
+
+                                    <span class="input-group-text">&nbsp;</span>
+
+                                </div>
+
+                            </div>
+
+
+
+                            <label for="endzeitmittag">Ende Mittagspause:</label>
+                            <br>
+                            <div class="input-group input-group-sm mb-1">
+
+                                <input class="Forminput1 form-control Zeit1" type="time" id="endzeitmittag"
+                                    name="endzeitmittag" value="13:19" size="20"
+                                    style="text-align: right; max-width: 100%;">
+
+                                <div class="input-group-append">
+
+                                    <span class="input-group-text">&nbsp;</span>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <p id="mittagspauseAnzeige"></p>
+
+
+
+
+                        <div class="input-group input-group-sm mb-1">
+                            <label for="endzeit">Endzeit:</label>
+                            <br>
+
+                            <input class="Forminput1 form-control Zeit1" type="time" id="endzeit" name="endzeit"
+                                value="13:19" size="20" style="text-align: right; max-width: 100%;">
+
+                            <div class="input-group-append">
+
+                                <span class="input-group-text">&nbsp;</span>
+
+                            </div>
+
+                        </div>
+                        <br>
+
+
+
+
+
+
+
+                        <script>
+
+                            document.getElementById("checkboxpause").addEventListener("change", togglePauseElement);
+
+
+
+
+
+                            function togglePauseElement() {
+
+                                const pauseElement = document.querySelector(".Pause");
+
+                                if (document.getElementById("checkboxpause").checked) {
+
+                                    pauseElement.style.display = "block"; // Zeige das Pause-Element
+
+                                } else {
+
+                                    pauseElement.style.display = "none"; // Verstecke das Pause-Element
+
+                                }
+
+                            }
+
+                        </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        <div class="textfield">
+
+                            <label for="numberfieldst">Soll Arbeitszeit eintragen:</label>
+
+                            <p> <input type="number" name="Studensoll" id="numberfieldst" placeholder="Soll Arbeitszeit"
+                                    max="10"></p>
+
+
+
+
+
+                        </div>
+                        <br>
+                        <br>
+
+
+                        <div>
+
+                            Vertretung?
+                            <br>
+                            <label for="checkboxvertretung">Ja </label>
+
+                            <input id="checkboxvertretung" type="checkbox" />
+
+
+
+                        </div>
+
+                        <div class="container">
+
+                        </div>
+                        <br>
+                        <br>
+
+
+
+
+
+
+                        <label for="Submitknopf">Möchtest du speichern?</label>
+                        <br>
+
+                        <button id="Submitknopf">Speichern</button>
+
+                        <br>
+
+                        <br>
+
+
+                        <br>
+                        <div class="Passworteingabe">
+
+                            <label for="passwort">Passwort für löschung: </label>
+
+                            <input type="password" id="passwort">
+                            <br>
+
+                            <button id="Eingabeps"> Eingabe</button>
+
+
+                        </div>
+
+
+                        <button id="clearbutton" style="display: none;" onclick="zeigeDaten()">Daten löschen</button>
+
+                        <div id="ergebnis"></div>
+
+
+
+
+
+
+
+                    </div>
+
+
+
+                    <div id="popup" class="popup" style="display: none;">
+
+                        <p>Sicher das du alle Daten löschen willst?</p>
+
+                        <button id="yesButton">Ja</button>
+
+                        <button id="noButton">Nein</button>
+
+                    </div>
+
+
+
+                    <div id="popupbest" class="popup" style="display: none;">
+
+                        <p>Sicher das du folgende Daten Speichern willst?</p>
+
+                        <p id="Anzeigedatenspeichern"></p>
+
+                        <button id="Speichern">Ja</button>
+
+                        <button id="verwerfen">Nein</button>
+
+                    </div>
+        </div>
+    </div>
+
+    </section>
+
+    </main>
+    </div>
+
+</body>
+
+</html>
