@@ -1,0 +1,62 @@
+/* Hintergrund auf hellgrau setzen */
+body {
+    background-color: lightgray;
+}
+
+/* Alle MDL-Objekte auf Orange ändern */
+.mdl-layout__header,
+.mdl-layout-title,
+.mdl-layout__tab-bar .mdl-layout__tab {
+    background-color: orange;
+    color: white;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Tabellencontainer-Stil hinzufügen */
+.page-content {
+    max-width: 100%; /* Damit die Tabelle nicht über den Bildschirmrand hinausgeht */
+    overflow-x: auto; /* Horizontales Scrollen aktivieren, wenn die Tabelle zu breit ist */
+}
+
+/* Tabellen-Stil anpassen */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #ddd;
+    margin-top: 20px;
+}
+
+table th,
+table td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Button-Stil innerhalb der Tabelle */
+table button {
+    background-color: transparent;
+    border: none;
+    color: white;
+    background-color: orange;
+    cursor: pointer;
+    padding: 0;
+}
+
+/* Button-Stil für "Suchen" */
+button {
+    background-color: orange;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 10px;
+    cursor: pointer;
+}
