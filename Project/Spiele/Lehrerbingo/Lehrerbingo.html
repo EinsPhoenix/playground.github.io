@@ -120,7 +120,7 @@
     <label for="selectOption">Wähle einen Lehrer:</label>
     <br>
     <select id="selectOption">
-        <option value="Lehrer1">Option 1</option>
+        <option value="Lehrer1">Lehrerin</option>
         <option value="Lehrer2">Option 2</option>
         <option value="Lehrer3">Option 3</option>
         <option value="Lehrer4">Option 4</option>
@@ -155,46 +155,71 @@
     </div>
 
     <script>
-        // Buttons in einer Tabelle anordnen
-        const table = document.querySelector("table");
-        const buttons = table.querySelectorAll("button");
-        var isclicked;
-
-        for (let button of buttons) {
-            button.style.backgroundColor = "lightgray";
-
-
-            // Listener für das Klicken auf einen Button hinzufügen
-            button.addEventListener("click", (event) => {
-                // ID des angeklickten Buttons auslesen
-
-                const id = event.target.id;
-
-                // ID in die Konsole schreiben
-                console.log(id);
-
-                if (event.target.style.backgroundColor === "red") {
-                    event.target.style.backgroundColor = "lightgray";
-                    event.target.setAttribute("isClicked", true);
-                    console.log(1);
-
-                }
-                else {
-                    event.target.style.backgroundColor = "red";
-                    event.target.removeAttribute("isClicked");
-                    console.log(0);
-
-                }
+        // Array mit Begriffen für die Buttons
+const BegriffeBingo = [
+"Flex Haus",
+"Geschichten aus dem Paulaner Garten",
+"Irgendwas mit Edag",
+"Voll mühe gegeben für die Präsie",
+"BEN jeder heißt Ben",
+"Warum wieder spät",
+"Eine Freundin von mir",
+"Ein Freund von mir",
+"Du überlegst Firmengeheimnisse auszuplaudern",
+"Person XY verdient X€",
+"Voll cool",
+"Ich habe damals",
+"VW Projekt",
+"Ich habe geleitet",
+"Beim Opelprojekt",
+"Wiederholt die letzte Stunde",
+"Mein Sohn",
+"Wer hat schon mal",
+"Mein Mann...",
+"Flex Flex Motorrad",
 
 
 
 
+// Weitere Begriffe hinzufügen
+];
 
-            });
-        }
+// Funktion, um einen zufälligen Begriff aus dem Array auszuwählen
+function getRandomBegriff() {
+const randomIndex = Math.floor(Math.random() * BegriffeBingo.length);
+return BegriffeBingo[randomIndex];
+}
 
-        // Listener für das Loslassen eines Buttons hinzufügen
+// Buttons in einer Tabelle anordnen
+const table = document.querySelector("table");
+const buttons = table.querySelectorAll("button");
 
+for (let button of buttons) {
+// Zufälligen Begriff auswählen und als Button-Text setzen
+const randomBegriff = getRandomBegriff();
+button.textContent = randomBegriff;
+
+button.style.backgroundColor = "lightgray";
+
+// Listener für das Klicken auf einen Button hinzufügen
+button.addEventListener("click", (event) => {
+  // ID des angeklickten Buttons auslesen
+  const id = event.target.id;
+
+  // ID in die Konsole schreiben
+  console.log(id);
+
+  if (event.target.style.backgroundColor === "red") {
+    event.target.style.backgroundColor = "lightgray";
+    event.target.setAttribute("isClicked", true);
+    console.log(1);
+  } else {
+    event.target.style.backgroundColor = "red";
+    event.target.removeAttribute("isClicked");
+    console.log(0);
+  }
+});
+}
     </script>
 </body>
 
