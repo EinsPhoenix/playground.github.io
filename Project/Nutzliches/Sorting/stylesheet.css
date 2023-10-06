@@ -1,0 +1,17 @@
+.bar {
+    width: 20px;
+    background-color: blue;
+    margin: 2px;
+    /* display: inline-block; */
+
+}
+
+.Visualisiert {
+    /* display: flex;
+    justify-content: center; */
+    height: 90vh;
+    display: flex;
+    align-items: flex-end;
+    padding: 10px;
+
+}

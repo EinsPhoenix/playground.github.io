@@ -1,0 +1,21 @@
+<head>
+
+    <link rel="stylesheet" type="text/css" href="stylesheet.css">
+</head>
+
+<body>
+    <div>
+        <p><input type="text" id="inputNumbers" placeholder="Nummern mit , getrennt" oninput="visualisierung()"></p>
+        <button onclick="sortStepByStep()">Sort</button>
+        <select name="dropdown" id="sortMethod">
+            <option value="quickSort">QuickSort</option>
+            <option value="mergeSort">MergeSort</option>
+            <option value="heapSort">HeapSort</option>
+            <option value="insertionSort">InsertionSort</option>
+            <option value="bubbleSort">BubbleSort</option>
+        </select>
+        <div class="Visualisiert" id="chart"></div>
+
+    </div>
+    <script src="logic.js"></script>
+</body>
