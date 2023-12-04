@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Number Learning App</title>
+  <style>
+    body {
+      background-color: #222;
+      color: #fff;
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    h1 {
+      color: #00bcd4; /* Teal color for the heading */
+    }
+
+    button {
+      background-color: #00bcd4; /* Teal color for the button */
+      color: #fff;
+      padding: 10px;
+      margin: 10px 0;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+    }
+
+    #numberTitle, #numberOptions {
+      margin: 10px 0;
+    }
+
+    input[type="radio"] {
+      margin-right: 5px;
+    }
+  </style>
+  <script>
+    function generateDecimalAndBinary() {
+      var decimalNumber = Math.floor(Math.random() * 256);
+      var binaryNumber = decimalNumber.toString(2);
+
+      document.getElementById('numberTitle').innerHTML = "Dezimalzahl: " + decimalNumber;
+      document.getElementById('numberOptions').innerHTML = "Suche die richtige Binäre Nummer:<br>";
+
+      var binaryOptions = [];
+      for (var i = 0; i < 8; i++) {
+        var randomBinary = Math.floor(Math.random() * 256).toString(2);
+        binaryOptions.push(randomBinary);
+
+        document.getElementById('numberOptions').innerHTML +=
+          "<input type='radio' name='numberRadio' value='" + randomBinary +
+          "' onclick='checkBinary(this.value, \"" + binaryNumber + "\")'> " + randomBinary + "<br>";
+      }
+    }
+
+    function generateBinaryAndDecimal() {
+      var binaryNumber = Math.floor(Math.random() * (Math.pow(2, 8))).toString(2).padStart(8, '0');
+      var decimalNumber = parseInt(binaryNumber, 2);
+
+      document.getElementById('numberTitle').innerHTML = "Binärzahl: " + binaryNumber;
+      document.getElementById('numberOptions').innerHTML = "Suche die richtige Dezimalzahl:<br>";
+
+      var decimalOptions = [];
+      for (var i = 0; i < 8; i++) {
+        var randomDecimal = Math.floor(Math.random() * 256);
+        decimalOptions.push(randomDecimal);
+
+        document.getElementById('numberOptions').innerHTML +=
+          "<input type='radio' name='numberRadio' value='" + randomDecimal +
+          "' onclick='checkDecimal(this.value, " + decimalNumber + ")'> " + randomDecimal + "<br>";
+      }
+    }
+
+    function checkBinary(selectedBinary, correctBinary) {
+      if (selectedBinary === correctBinary) {
+        alert("Richtig! Neue Zahlen werden generiert.");
+        generateDecimalAndBinary();
+      } else {
+        alert("Falsch! Versuche es erneut.");
+      }
+    }
+
+    function checkDecimal(selectedDecimal, correctDecimal) {
+      if (parseInt(selectedDecimal) === correctDecimal) {
+        alert("Richtig! Neue Zahlen werden generiert.");
+        generateBinaryAndDecimal();
+      } else {
+        alert("Falsch! Versuche es erneut.");
+      }
+    }
+  </script>
+</head>
+<body>
+  <h1>Lerne Binär</h1>
+  <button onclick="generateDecimalAndBinary()">Generiere Dezimal- und Binärzahlen</button>
+  <button onclick="generateBinaryAndDecimal()">Generiere Binär- und Dezimalzahlen</button>
+  <p id="numberTitle"></p>
+  <div id="numberOptions"></div>
+</body>
+</html>

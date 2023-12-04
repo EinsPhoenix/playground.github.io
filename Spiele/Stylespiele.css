@@ -1,0 +1,56 @@
+body {
+    background-color: #232323;
+    margin: 0;
+    font-family: "Lato", "Helvetica";
+    color: white;
+    text-align: center;
+}
+
+/* CSS-Styling für die Navigationsleiste */
+#navbar {
+    background-color: #333;
+    /* Hintergrundfarbe der Navigationsleiste */
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+#navbar a {
+    float: left;
+    display: block;
+    color: white;
+    /* Schriftfarbe der Navigationsleisten-Links */
+    text-align: center;
+    padding: 14px 16px;
+    /* Innenabstand der Links */
+    text-decoration: none;
+}
+
+#navbar a:hover {
+    background-color: #7c7c7c;
+    /* Hintergrundfarbe bei Hover über Links */
+    color: black;
+    /* Schriftfarbe bei Hover über Links */
+}
+
+/* CSS-Styling für die Schaltflächen */
+.button-container {
+    text-align: center;
+    margin-top: 20px;
+    /* Abstand oberhalb der Schaltflächen */
+}
+
+.button {
+    background-color: #4CAF50;
+    /* Hintergrundfarbe der Schaltflächen */
+    color: white;
+    /* Schriftfarbe der Schaltflächen */
+    padding: 10px 20px;
+    /* Innenabstand der Schaltflächen */
+    border: none;
+    cursor: pointer;
+    margin: 5px;
+    /* Abstand zwischen den Schaltflächen */
+}
